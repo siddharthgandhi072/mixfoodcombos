@@ -1,0 +1,6 @@
+/* write.css — the post composer. Just a wider form-card; the shared field
+   styling lives in base.css so it stays identical everywhere a form
+   appears. */
+
+.write-page { padding: 48px 20px 80px; }
+.write-form { max-width: 640px; }

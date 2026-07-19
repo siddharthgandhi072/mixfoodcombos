@@ -1,0 +1,35 @@
+/* auth.css — shared by signup.html and login.html: a single centered card
+   floating over a soft two-tone background, quieter than the rest of the
+   site since the only job of this page is "fill out this form". */
+
+.auth-page {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: linear-gradient(160deg, var(--color-peach-pale) 0%, var(--color-cream) 55%);
+}
+
+.auth-page .form-card { position: relative; z-index: 1; width: 100%; }
+
+.auth-page h1 { text-align: center; margin-bottom: 1em; }
+
+.auth-switch {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-forest-deep);
+  margin-top: 14px;
+}
+.auth-switch a { font-weight: 700; color: var(--color-peach-deep); }
+
+#forgot-box { margin-top: 4px; }
+
+.auth-doodle-1 { top: 8%; left: 8%; width: 70px; transform: rotate(-10deg); }
+.auth-doodle-2 { bottom: 10%; right: 10%; width: 70px; transform: rotate(14deg); }
+
+@media (max-width: 600px) {
+  .auth-doodle-1, .auth-doodle-2 { display: none; }
+}

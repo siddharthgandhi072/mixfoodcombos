@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — MIX</title>
+  <meta name="description" content="Browse food combos shared by the MIX community, newest first." />
+  <meta property="og:title" content="Blog — MIX" />
+  <meta property="og:description" content="Browse food combos shared by the MIX community, newest first." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/blog.css" />
+</head>
+<body data-page="blog">
+  <div id="nav-placeholder"></div>
+  <div id="page-message" class="page-message" hidden></div>
+
+  <main class="container blog-page">
+    <header class="blog-header">
+      <div>
+        <h1>The Blog</h1>
+        <p>Food combos from the community, newest first.</p>
+      </div>
+      <a href="write.html" class="btn btn-primary">Write a Post</a>
+    </header>
+
+    <div id="blog-list" class="blog-grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>MIX — Meals Invented by Xperimenting</p>
+  </footer>
+
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/blog.js"></script>
+</body>
+</html>

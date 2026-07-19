@@ -1,0 +1,138 @@
+// firestore.rules
+//
+// This is the REAL backend of the site. Anything you can do from the
+// browser (create a post, like something, approve a submission) is only
+// actually possible if a rule below allows it — the JavaScript files just
+// ask Firestore to do things; Firestore checks these rules on Google's
+// servers before agreeing. Hiding a button in the UI is not security;
+// these rules are the security. See docs/ARCHITECTURE.md for a longer
+// walkthrough of how to read this file.
+//
+// Deploy this by pasting it into: Firebase console > Firestore Database >
+// Rules > paste > Publish. See docs/SETUP.md.
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- Small reusable helper functions (like Python helper functions) ----
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // True only if a document exists at admins/<the current user's id>.
+    // That document is created manually in the Firebase console by the
+    // site owner — never by any code — so this can't be self-granted.
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // True if this write only touches the given fields, no others. Used
+    // to make sure, e.g., "approving a post" can't sneakily also rewrite
+    // its title.
+    function onlyChanged(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+
+    // ---- admins/{uid}: who is an admin -------------------------------------
+    // Console-only, forever. No code path (not even the admin's own
+    // account) is ever allowed to write here.
+    match /admins/{uid} {
+      allow read: if isOwner(uid);
+      allow write: if false;
+    }
+
+    // ---- usernames/{usernameLower}: uniqueness registry --------------------
+    // Firestore has no built-in "unique" constraint, so this collection
+    // exists purely so a username can be claimed exactly once. Document ID
+    // = the lowercased username; must be readable while logged out so
+    // availability can be checked before signup.
+    match /usernames/{usernameLower} {
+      allow read: if true;
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow delete: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow update: if false; // renaming = delete old doc + create new doc
+    }
+
+    // ---- users/{uid}: profile info ------------------------------------------
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if isOwner(uid) && request.resource.data.uid == uid;
+      allow update: if isOwner(uid) && request.resource.data.email == resource.data.email; // email is frozen
+      allow delete: if false;
+    }
+
+    // ---- posts/{postId}: blog posts ------------------------------------------
+    match /posts/{postId} {
+      allow read: if resource.data.status == 'approved'
+                  || (isSignedIn() && isOwner(resource.data.authorUid))
+                  || isAdmin();
+
+      allow create: if isSignedIn()
+                  && request.resource.data.authorUid == request.auth.uid
+                  && request.resource.data.status == 'pending'
+                  && request.resource.data.likedBy.size() == 0
+                  && request.resource.data.viewCount == 0
+                  && request.resource.data.title.size() > 0
+                  && request.resource.data.title.size() <= 200
+                  && request.resource.data.body.size() > 0
+                  && request.resource.data.body.size() <= 20000;
+
+      allow update: if
+          // Author edits their own post's content -> forced back to "pending"
+          ( isOwner(resource.data.authorUid)
+            && request.resource.data.status == 'pending'
+            && onlyChanged(['title', 'body', 'imageURL', 'imagePath', 'editedAt', 'status']) )
+
+          // Admin approves/rejects -> only status (+reviewedAt) may change
+          || ( isAdmin()
+            && onlyChanged(['status', 'reviewedAt'])
+            && (request.resource.data.status == 'approved' || request.resource.data.status == 'rejected') )
+
+          // Any signed-in user toggles THEIR OWN uid in/out of likedBy
+          || ( isSignedIn()
+            && onlyChanged(['likedBy'])
+            && ( request.resource.data.likedBy == resource.data.likedBy.concat([request.auth.uid])
+                 || request.resource.data.likedBy == resource.data.likedBy.removeAll([request.auth.uid]) ) )
+
+          // Anyone (even logged out) bumps the view counter by exactly 1,
+          // and only on already-approved posts.
+          || ( onlyChanged(['viewCount'])
+            && resource.data.status == 'approved'
+            && request.resource.data.viewCount == resource.data.viewCount + 1 );
+
+      allow delete: if isSignedIn() && (isOwner(resource.data.authorUid) || isAdmin());
+    }
+
+    // ---- chatMessages/{messageId}: top-level messages AND replies ------------
+    // (a flat collection; parentId == null means "top-level")
+    match /chatMessages/{messageId} {
+      allow read: if resource.data.status == 'approved'
+                  || (isSignedIn() && isOwner(resource.data.authorUid))
+                  || isAdmin();
+
+      allow create: if isSignedIn()
+                  && request.resource.data.authorUid == request.auth.uid
+                  && request.resource.data.status == 'pending'
+                  && request.resource.data.text.size() > 0
+                  && request.resource.data.text.size() <= 1500; // ~200 words; see docs/ARCHITECTURE.md
+
+      allow update: if
+          ( isOwner(resource.data.authorUid)
+            && request.resource.data.status == 'pending'
+            && onlyChanged(['text', 'editedAt', 'status']) )
+
+          || ( isAdmin()
+            && onlyChanged(['status', 'reviewedAt'])
+            && (request.resource.data.status == 'approved' || request.resource.data.status == 'rejected') );
+
+      allow delete: if isSignedIn() && (isOwner(resource.data.authorUid) || isAdmin());
+    }
+  }
+}

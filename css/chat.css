@@ -1,0 +1,73 @@
+/* chat.css — a cozier, bubble-and-thread feel: a mint-tinted page, a
+   sticky-feeling composer up top, and indented replies with a colored
+   rail, distinctly different from the magazine (blog) and dashboard
+   (account) layouts elsewhere on the site. */
+
+.chat-page {
+  padding: 40px 20px 80px;
+  background: linear-gradient(180deg, var(--color-forest-light) 0%, transparent 220px);
+}
+
+.chat-header { text-align: center; margin-bottom: 24px; }
+.chat-header p { color: var(--color-forest-deep); }
+
+.chat-composer {
+  max-width: 640px;
+  margin: 0 auto 32px;
+  border: 2px solid var(--color-forest);
+}
+.chat-composer textarea {
+  width: 100%;
+  min-height: 90px;
+  border: none;
+  resize: vertical;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: transparent;
+}
+.chat-composer textarea:focus { outline: none; }
+
+.reply-composer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.word-count { font-size: 0.85rem; color: var(--color-forest-light); }
+.word-count--over { color: var(--color-error); font-weight: 700; }
+
+.chat-feed {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-message { border-left: 4px solid var(--color-peach); }
+.chat-message-meta { margin-bottom: 4px; }
+.chat-message-meta strong { color: var(--color-forest-deep); }
+.chat-message-text { margin-bottom: 8px; white-space: pre-wrap; }
+.chat-message-actions { display: flex; gap: 14px; }
+
+.chat-replies {
+  margin: 14px 0 0 22px;
+  padding-left: 16px;
+  border-left: 2px dashed var(--color-forest-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.chat-message--reply { border-left-color: var(--color-forest-light); }
+
+.chat-reply-composer, .chat-edit-box { margin-top: 10px; }
+.reply-textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 10px;
+  border: 2px solid var(--color-forest-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  resize: vertical;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account — MIX</title>
+  <meta name="description" content="Manage your MIX account and see stats for your posts." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/account.css" />
+</head>
+<body data-page="account">
+  <div id="nav-placeholder"></div>
+  <div id="page-message" class="page-message" hidden></div>
+
+  <main class="container account-page">
+    <header class="account-header">
+      <h1>Hi, <span id="account-username-display">…</span></h1>
+      <p class="meta-dates" id="account-email"></p>
+    </header>
+
+    <section class="account-stats-bar card">
+      <div><strong id="total-posts">0</strong><span>posts</span></div>
+      <div><strong id="total-likes">0</strong><span>total likes</span></div>
+      <div><strong id="total-views">0</strong><span>total views</span></div>
+    </section>
+
+    <div class="account-grid">
+      <section class="account-settings">
+        <h2>Settings</h2>
+
+        <form class="card settings-form" id="username-form">
+          <h3>Change username</h3>
+          <div class="field">
+            <label for="username-input">New username</label>
+            <input type="text" id="username-input" required />
+          </div>
+          <div class="field">
+            <label for="username-current-password">Current password (to confirm it's you)</label>
+            <input type="password" id="username-current-password" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-small">Update username</button>
+        </form>
+
+        <form class="card settings-form" id="password-form">
+          <h3>Change password</h3>
+          <div class="field">
+            <label for="current-password">Current password</label>
+            <input type="password" id="current-password" required />
+          </div>
+          <div class="field">
+            <label for="new-password">New password</label>
+            <input type="password" id="new-password" minlength="6" required />
+          </div>
+          <div class="field">
+            <label for="confirm-password">Confirm new password</label>
+            <input type="password" id="confirm-password" minlength="6" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-small">Update password</button>
+        </form>
+      </section>
+
+      <section class="account-content">
+        <h2>My posts</h2>
+        <div id="my-posts-list" class="account-row-list"></div>
+
+        <h2>My chat messages</h2>
+        <div id="my-messages-list" class="account-row-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>MIX — Meals Invented by Xperimenting</p>
+  </footer>
+
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/account.js"></script>
+</body>
+</html>

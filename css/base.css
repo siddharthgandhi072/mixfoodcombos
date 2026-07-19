@@ -1,0 +1,291 @@
+/* ==========================================================================
+   base.css — MIX shared design system
+   ==========================================================================
+   Every page loads this file first, then one small page-specific stylesheet
+   (blog.css, chat.css, account.css, etc.) that layers a different layout on
+   top. Change a color here and it updates everywhere; change a layout in a
+   page's own file and only that page is affected.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap');
+
+:root {
+  /* --- Color palette: peach + forest green, as requested --- */
+  --color-cream: #fffaf3;        /* page background */
+  --color-peach: #ffb88c;        /* primary warm accent */
+  --color-peach-deep: #f4845f;   /* warm accent for emphasis / hover */
+  --color-peach-pale: #ffe8d6;   /* light warm background panels */
+  --color-forest: #2f5233;       /* primary accent, nav, headings */
+  --color-forest-deep: #1b3a24;  /* darkest green, hover states */
+  --color-forest-light: #7fa687; /* soft green accents, borders */
+  --color-ink: #2b2118;          /* main text color (warm near-black) */
+  --color-white: #ffffff;
+  --color-error: #b3261e;
+  --color-error-bg: #fdecea;
+  --color-success: #2f5233;
+  --color-success-bg: #e7f0e8;
+
+  /* --- Type --- */
+  --font-heading: "Fredoka", sans-serif;
+  --font-body: "Nunito Sans", sans-serif;
+
+  /* --- Spacing / shape --- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --shadow-card: 0 4px 16px rgba(43, 33, 24, 0.08);
+  --shadow-card-hover: 0 8px 24px rgba(43, 33, 24, 0.14);
+  --max-width: 1080px;
+}
+
+/* --- Reset --- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-forest-deep);
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}
+
+p { margin: 0 0 1em; }
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+main { flex: 1; }
+
+/* ==========================================================================
+   Top navigation (built by js/nav.js — see that file for the logic)
+   ========================================================================== */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+  background: var(--color-white);
+  border-bottom: 3px solid var(--color-forest);
+  position: relative;
+  z-index: 20;
+}
+
+.nav-logo { display: flex; align-items: center; flex-shrink: 0; }
+.nav-logo img { height: 40px; width: auto; }
+
+.nav-links { display: flex; gap: 18px; font-weight: 700; }
+.nav-links a {
+  padding: 6px 4px;
+  border-bottom: 3px solid transparent;
+}
+.nav-links a:hover { color: var(--color-peach-deep); }
+.nav-links a.active { border-bottom-color: var(--color-peach-deep); color: var(--color-forest-deep); }
+
+.nav-search { flex: 1; max-width: 320px; margin-left: auto; }
+.nav-search input {
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--color-forest-light);
+  background: var(--color-cream);
+  font-family: var(--font-body);
+}
+.nav-search input:focus { outline: none; border-color: var(--color-peach-deep); }
+
+.nav-right { flex-shrink: 0; }
+.nav-login-btn { white-space: nowrap; }
+
+.nav-account { position: relative; }
+.nav-account-toggle {
+  background: var(--color-peach-pale);
+  border: 2px solid var(--color-peach);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 700;
+  color: var(--color-forest-deep);
+}
+.nav-account-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--color-white);
+  border: 2px solid var(--color-forest-light);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  overflow: hidden;
+}
+.nav-account-menu a,
+.nav-account-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+.nav-account-menu a:hover,
+.nav-account-menu button:hover { background: var(--color-peach-pale); }
+
+@media (max-width: 760px) {
+  .site-nav { flex-wrap: wrap; gap: 12px; }
+  .nav-search { order: 3; max-width: none; margin-left: 0; flex-basis: 100%; }
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font-weight: 700;
+  font-family: var(--font-body);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary { background: var(--color-forest); color: var(--color-white); }
+.btn-primary:hover { background: var(--color-forest-deep); }
+
+.btn-secondary { background: var(--color-peach); color: var(--color-forest-deep); }
+.btn-secondary:hover { background: var(--color-peach-deep); color: var(--color-white); }
+
+.btn-outline { background: transparent; border-color: var(--color-forest); color: var(--color-forest); }
+.btn-outline:hover { background: var(--color-forest); color: var(--color-white); }
+
+.btn-danger { background: var(--color-error-bg); color: var(--color-error); border-color: var(--color-error); }
+.btn-danger:hover { background: var(--color-error); color: var(--color-white); }
+
+.btn-small { padding: 6px 14px; font-size: 0.85rem; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-forest-light);
+  text-decoration: underline;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.link-button--danger { color: var(--color-error); }
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+.form-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 32px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.field { margin-bottom: 18px; }
+.field label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--color-forest-deep);
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--color-forest-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--color-cream);
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus { outline: none; border-color: var(--color-peach-deep); }
+.field textarea { resize: vertical; min-height: 140px; }
+.field-hint { font-size: 0.85rem; color: var(--color-forest-light); margin-top: 4px; }
+
+/* ==========================================================================
+   Page message banner (js/utils.js showMessage/clearMessage)
+   ========================================================================== */
+.page-message {
+  max-width: var(--max-width);
+  margin: 16px auto 0;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+.page-message--error { background: var(--color-error-bg); color: var(--color-error); }
+.page-message--success { background: var(--color-success-bg); color: var(--color-success); }
+
+/* ==========================================================================
+   Cards (blog post cards, chat messages, admin queue items, account rows)
+   ========================================================================== */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.badge--pending { background: #fff3d6; color: #8a6d1f; }
+.badge--approved { background: var(--color-success-bg); color: var(--color-success); }
+.badge--rejected { background: var(--color-error-bg); color: var(--color-error); }
+
+.meta-dates { font-size: 0.85rem; color: var(--color-forest-light); }
+
+/* ==========================================================================
+   Decorative food doodles — positioned per-page in each page's own CSS
+   file using these as a shared base (see blog.css/chat.css/account.css/etc.)
+   ========================================================================== */
+.doodle {
+  position: absolute;
+  width: 90px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  text-align: center;
+  padding: 28px 20px;
+  color: var(--color-forest-light);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--color-peach-pale);
+}

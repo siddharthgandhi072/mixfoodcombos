@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Write a Post — MIX</title>
+  <meta name="description" content="Share a food combo with the MIX community." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/write.css" />
+</head>
+<body data-page="write">
+  <div id="nav-placeholder"></div>
+  <div id="page-message" class="page-message" hidden></div>
+
+  <main class="container write-page">
+    <form class="form-card write-form" id="write-form">
+      <h1 id="write-heading">Write a post</h1>
+      <p class="field-hint">Your post will be reviewed before it appears publicly.</p>
+
+      <div class="field">
+        <label for="title-input">Title</label>
+        <input type="text" id="title-input" maxlength="200" required />
+      </div>
+
+      <div class="field">
+        <label for="body-input">Your write-up</label>
+        <textarea id="body-input" maxlength="20000" required placeholder="What's the combo? Why does it work?"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="write-submit">Submit for review</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <p>MIX — Meals Invented by Xperimenting</p>
+  </footer>
+
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/write.js"></script>
+</body>
+</html>

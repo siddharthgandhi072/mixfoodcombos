@@ -1,0 +1,21 @@
+/* search.css — reuses blog.css's card grid for results; this file only
+   styles the heading and the on-page search box itself. */
+
+.search-page { padding: 40px 20px 80px; }
+.search-page h1 { margin-bottom: 20px; }
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+.search-form input {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 2px solid var(--color-forest-light);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+.search-form input:focus { outline: none; border-color: var(--color-peach-deep); }

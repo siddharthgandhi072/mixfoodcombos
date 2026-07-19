@@ -1,0 +1,43 @@
+/* blog.css — a magazine/news-style grid: cards with a photo on top, the
+   newest post given extra width so the page reads like a front page
+   rather than a plain list. */
+
+.blog-page { padding: 40px 20px 80px; }
+
+.blog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.blog-header h1 { margin-bottom: 0.1em; }
+.blog-header p { margin: 0; color: var(--color-forest-light); }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.blog-grid > a:first-child { grid-column: span 2; }
+
+.post-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-top: 6px solid var(--color-peach);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.post-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
+
+.post-card-body { padding: 18px; }
+.post-card-body h3 { font-size: 1.15rem; margin-bottom: 6px; }
+.post-card-author { font-weight: 700; color: var(--color-forest-deep); margin-bottom: 2px; }
+.post-card-stats { color: var(--color-peach-deep); font-weight: 700; margin: 8px 0 0; }
+
+@media (max-width: 640px) {
+  .blog-grid > a:first-child { grid-column: span 1; }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Review — MIX</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="admin">
+  <div id="nav-placeholder"></div>
+  <div id="page-message" class="page-message" hidden></div>
+
+  <main class="container admin-page">
+    <h1>Review Queue</h1>
+    <p class="field-hint">Approving publishes it live and emails the author. Rejecting keeps it hidden and emails the author too.</p>
+
+    <section class="admin-section">
+      <h2>Pending posts <span class="queue-count" id="pending-posts-count">0</span></h2>
+      <div id="pending-posts" class="queue-list"></div>
+    </section>
+
+    <section class="admin-section">
+      <h2>Pending chat messages <span class="queue-count" id="pending-messages-count">0</span></h2>
+      <div id="pending-messages" class="queue-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>MIX — Meals Invented by Xperimenting</p>
+  </footer>
+
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

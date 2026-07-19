@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat — MIX</title>
+  <meta name="description" content="Talk food combos with the MIX community." />
+  <meta property="og:title" content="Chat — MIX" />
+  <meta property="og:description" content="Talk food combos with the MIX community." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/chat.css" />
+</head>
+<body data-page="chat">
+  <div id="nav-placeholder"></div>
+  <div id="page-message" class="page-message" hidden></div>
+
+  <main class="container chat-page">
+    <header class="chat-header">
+      <h1>Chat</h1>
+      <p>Ask questions, swap ideas, reply to each other. Newest messages first.</p>
+    </header>
+
+    <form class="card chat-composer" id="composer-form" hidden>
+      <textarea id="composer-text" placeholder="Say something... (200 words max)"></textarea>
+      <div class="reply-composer-footer">
+        <span class="word-count" id="composer-count">0 / 200 words</span>
+        <button type="submit" class="btn btn-primary btn-small" id="composer-submit" disabled>Post</button>
+      </div>
+    </form>
+    <p class="empty-state" id="composer-logged-out"><a href="login.html">Log in</a> to join the conversation.</p>
+
+    <div id="chat-feed" class="chat-feed"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>MIX — Meals Invented by Xperimenting</p>
+  </footer>
+
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/chat.js"></script>
+</body>
+</html>

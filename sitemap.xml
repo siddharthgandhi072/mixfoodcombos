@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Only the static, always-the-same pages are listed here. Individual blog
+  posts (post.html?id=...) are deliberately left out: their content is
+  loaded client-side from Firestore rather than present in the HTML a
+  search engine first downloads, so listing them wouldn't help them get
+  indexed anyway. See docs/ARCHITECTURE.md for this tradeoff and a
+  possible future fix.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mixfoodcombos.org/index.html</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mixfoodcombos.org/blog.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mixfoodcombos.org/chat.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mixfoodcombos.org/search.html</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>

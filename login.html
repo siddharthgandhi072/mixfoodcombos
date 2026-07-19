@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log In — MIX</title>
+  <meta name="description" content="Log in to your MIX account." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body data-page="login">
+  <div id="nav-placeholder"></div>
+  <div id="page-message" class="page-message" hidden></div>
+
+  <main class="auth-page">
+    <img src="assets/svg/avocado.svg" class="doodle auth-doodle-1" alt="" />
+    <img src="assets/svg/steam-swirl.svg" class="doodle auth-doodle-2" alt="" />
+
+    <form class="form-card" id="login-form">
+      <h1>Welcome back</h1>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="login-submit">Log in</button>
+
+      <p class="auth-switch">
+        <button type="button" class="link-button" id="forgot-toggle">Forgot your password?</button>
+      </p>
+
+      <div id="forgot-box" hidden>
+        <div class="field">
+          <label for="reset-email">Email for reset link</label>
+          <input type="email" id="reset-email" />
+        </div>
+        <button type="button" class="btn btn-outline btn-small" id="reset-submit">Send reset link</button>
+      </div>
+
+      <p class="auth-switch">New to MIX? <a href="signup.html">Create an account</a></p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <p>MIX — Meals Invented by Xperimenting</p>
+  </footer>
+
+  <script type="module" src="js/nav.js"></script>
+  <script type="module">
+    import { logIn, sendReset } from "./js/auth.js";
+    import { showMessage, clearMessage, friendlyAuthError } from "./js/utils.js";
+
+    const form = document.getElementById("login-form");
+    const submitBtn = document.getElementById("login-submit");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      submitBtn.disabled = true;
+      try {
+        await logIn(email, password);
+        window.location.href = "account.html";
+      } catch (error) {
+        showMessage(friendlyAuthError(error));
+        submitBtn.disabled = false;
+      }
+    });
+
+    document.getElementById("forgot-toggle").addEventListener("click", () => {
+      document.getElementById("forgot-box").hidden = false;
+    });
+
+    document.getElementById("reset-submit").addEventListener("click", async () => {
+      const email = document.getElementById("reset-email").value.trim();
+      if (!email) {
+        showMessage("Enter your email above first.");
+        return;
+      }
+      try {
+        await sendReset(email);
+        clearMessage();
+        showMessage("Check your email for a password reset link.", "success");
+      } catch (error) {
+        showMessage(friendlyAuthError(error));
+      }
+    });
+  </script>
+</body>
+</html>

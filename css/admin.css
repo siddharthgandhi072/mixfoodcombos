@@ -1,0 +1,35 @@
+/* admin.css — a plain, utilitarian review queue: no decoration, just
+   clear cards and big Approve/Reject buttons, since this page is a tool
+   for the site owner rather than a page for visitors. */
+
+.admin-page { padding: 40px 20px 80px; }
+
+.admin-section { margin-top: 36px; }
+.admin-section h2 { display: flex; align-items: center; gap: 10px; }
+
+.queue-count {
+  background: var(--color-peach);
+  color: var(--color-forest-deep);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.queue-list { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+
+.queue-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.queue-item-body { flex: 1; }
+.queue-item-body h3 { font-size: 1.05rem; margin-bottom: 4px; }
+
+.queue-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}

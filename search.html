@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search — MIX</title>
+  <meta name="description" content="Search food combos on MIX." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/blog.css" />
+  <link rel="stylesheet" href="css/search.css" />
+</head>
+<body data-page="search">
+  <div id="nav-placeholder"></div>
+  <div id="page-message" class="page-message" hidden></div>
+
+  <main class="container search-page">
+    <h1 id="search-heading">Search</h1>
+
+    <form id="search-form" class="search-form">
+      <input type="search" id="search-query-input" placeholder="Search blog posts..." />
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <div id="search-results" class="blog-grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>MIX — Meals Invented by Xperimenting</p>
+  </footer>
+
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/search.js"></script>
+</body>
+</html>
