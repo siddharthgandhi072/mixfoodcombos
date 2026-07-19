@@ -9,19 +9,19 @@
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mixfoodcombos.org/index.html</loc>
+    <loc>https://mixfoodcombos.com/index.html</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mixfoodcombos.org/blog.html</loc>
+    <loc>https://mixfoodcombos.com/blog.html</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mixfoodcombos.org/chat.html</loc>
+    <loc>https://mixfoodcombos.com/chat.html</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://mixfoodcombos.org/search.html</loc>
+    <loc>https://mixfoodcombos.com/search.html</loc>
     <priority>0.3</priority>
   </url>
 </urlset>

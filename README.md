@@ -7,7 +7,7 @@ yet — see docs/SETUP.md Part A for why and how to turn them on later.
 
 - **First time setting this up?** Start with [docs/SETUP.md](docs/SETUP.md)
   — Firebase/EmailJS setup, running it locally, deploying to GitHub Pages,
-  connecting the `mixfoodcombos.org` domain, and managing SEO.
+  connecting the `mixfoodcombos.com` domain, and managing SEO.
 - **Want to understand or change the code?** Read
   [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — every file explained,
   written for someone comfortable with Python/HTML/CSS but new to

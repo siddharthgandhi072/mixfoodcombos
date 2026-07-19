@@ -1,7 +1,7 @@
 # MIX — Setup, Deployment, SEO & Domain Guide
 
 This is the practical, step-by-step guide to taking this code from "files on
-your computer" to "live at mixfoodcombos.org." Do the sections in order —
+your computer" to "live at mixfoodcombos.com." Do the sections in order —
 each one depends on the last.
 
 **Security rule for this whole guide:** never commit a real password,
@@ -121,7 +121,7 @@ the browser when you click Approve/Reject — no server needed.
    `EMAILJS_APPROVED_TEMPLATE_ID`, and `EMAILJS_REJECTED_TEMPLATE_ID`
    constants with the real values.
 7. In EmailJS under **Account → Security**, add your GitHub Pages domain
-   (and `mixfoodcombos.org` once connected) to the allowed origins, so
+   (and `mixfoodcombos.com` once connected) to the allowed origins, so
    only your site can trigger emails with your key.
 
 The free EmailJS tier sends up to 200 emails/month — plenty for a
@@ -164,9 +164,9 @@ before pushing anything live.
    to confirm the site loads. Fix anything broken here *before* moving to
    the custom domain — it's much easier to debug on the default GitHub URL.
 
-## Part G — Connect mixfoodcombos.org
+## Part G — Connect mixfoodcombos.com
 
-1. Log into wherever you registered `mixfoodcombos.org` (your DNS
+1. Log into wherever you registered `mixfoodcombos.com` (your DNS
    provider/registrar) and add these records:
 
    | Type | Host/Name | Value |
@@ -181,14 +181,14 @@ before pushing anything live.
    your repo.
 
 2. Back on GitHub, **Settings → Pages → Custom domain**, type
-   `mixfoodcombos.org`, and **Save**. (This project's repo already
+   `mixfoodcombos.com`, and **Save**. (This project's repo already
    contains a `CNAME` file with that domain in it — GitHub will confirm it
    matches what you typed.)
 3. DNS changes can take anywhere from a few minutes to ~48 hours to
    propagate. GitHub shows a "DNS check in progress" then "DNS check
    successful" message on the Pages settings page.
 4. Once it's successful, check the **Enforce HTTPS** box. Now
-   `https://mixfoodcombos.org` serves the site with a free, automatically
+   `https://mixfoodcombos.com` serves the site with a free, automatically
    renewed certificate.
 
 ## Part H — Managing SEO
@@ -206,7 +206,7 @@ What's already built in (see `docs/ARCHITECTURE.md` for the reasoning):
 To actually get indexed by Google:
 
 1. Go to [Google Search Console](https://search.google.com/search-console),
-   add `mixfoodcombos.org` as a property, and verify ownership (Search
+   add `mixfoodcombos.com` as a property, and verify ownership (Search
    Console will give you a DNS TXT record to add at your registrar — same
    place as Part G).
 2. Under **Sitemaps**, submit `sitemap.xml`.
